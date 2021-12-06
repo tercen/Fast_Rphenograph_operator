@@ -10,7 +10,7 @@
   }
   ], 
   "inputDataUri": "lucas_measurement_exp.tsv",
-  "outputDataUri": ["table1.csv",],
+  "outputDataUri": ["table1.csv"],
   "columns": ["Observation"],
   "rows": ["Variable"],
   "colors": [],
