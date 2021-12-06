@@ -1,50 +1,38 @@
-# Template R operator
-
-The `Template R operator` is a template repository for the creation of R operators in Tercen. An overview of steps for developing an operator are:
-
-1. create a github repo
-2. install tercen_studio
-3. login to tercen_studio
-4. git clone the newly created repo
-5. start developing in R in tercen_studio
-6. add R packages to the repo
-7. push to the github repo
-8. go to tercen and install the operator
-
-More information can be found in [Tercen app builder's guide](https://tercen.github.io/appbuilders-guide/).
-
-Below is the operator README standard structure:
+# fast rphenograph operator
 
 ##### Description
 
-The `Template R operator` is a template repository for the creation of R operators in Tercen.
+Implementation of the fast rphenograph algorithm.
+The `rphenograph` operator performs a clustering of data (mainly flow cytometry) from the `Rphenograph` package.
 
 ##### Usage
 
 Input projection|.
 ---|---
-`x-axis`        | type, description 
-`y-axis`        | type, description 
-`row`           | type, description 
-`column`        | type, description 
-`colors`        | type, description 
-`labels`        | type, description 
+`row`   | represents the variables (e.g. channels, markers)
+`col`   | represents the observations (e.g. cells) 
+`y-axis`| is the value of measurement signal of the channel/marker
+
 
 Input parameters|.
 ---|---
-`input_var`        | parameter description
+`k`   | integer, number of nearest neighbours (default: 30)
+`seed`   | integer, random seed (default: NULL)
 
 Output relations|.
 ---|---
-`output_var`        | output relation
-`Operator view`        | view of the Shiny application
+`membership_num`| numeric, per column (e.g. per cell)
+`membership_label`| character, per column (e.g. per cell)
+`modularity_num`| numeric, per column (e.g. per cell)
 
 ##### Details
 
-Details on the computation.
+FastPG utilizes the same three main steps as the phenograph algorithm [@Levine-2015, @Chen-2016], but uses fast, parallel implementations.
+
+The `Rphenograh` R package is a simple R implementation of the phenograph [PhenoGraph](http://www.cell.com/cell/abstract/S0092-8674(15)00637-6) algorithm, which is a clustering method designed for high-dimensional single-cell data analysis. It works by creating a graph ("network") representing phenotypic similarities between cells by calclating the Jaccard coefficient between nearest-neighbor sets, and then identifying communities using the well known [Louvain method](https://sites.google.com/site/findcommunities/) in this graph. 
 
 ##### See Also
 
-[template_shiny_operator](https://github.com/tercen/template_shiny_operator)
-, [template_docker_operator](https://github.com/tercen/template_docker_operator)
+[RphenoGraph package](https://github.com/i-cyto/Rphenograph).
+[RphenoGraph operator](https://github.com/tercen/rphenograph_operator)
 
