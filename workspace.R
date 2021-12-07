@@ -30,9 +30,9 @@ num_threads<-1
 clusters <- fastCluster( data, k, num_threads )
 
 membership_num <- as.numeric(clusters$communities)
-membership_label <-sprintf(paste0("c%0", max(nchar(as.character(membership_num))), "d"), membership_num)
-modularity_num <- clusters$modularity
+cluster_id <-sprintf(paste0("c%0", max(nchar(as.character(membership_num))), "d"), membership_num)
+#modularity_num <- clusters$modularity
 
-data.frame(.ci = seq(from = 0, to = length(membership_num) - 1), membership_num, membership_label, modularity_num) %>%
+data.frame(.ci = seq(from = 0, to = length(cluster_id) - 1), cluster_id) %>%
   ctx$addNamespace() %>%
   ctx$save()
